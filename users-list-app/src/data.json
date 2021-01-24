@@ -1,0 +1,22 @@
+[
+  {
+    "image": "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kMXJhbHNvZ25qbmczNy5jbG91ZGZyb250Lm5ldC84NDViOGExNC1jMzQ2LTQ2ODItYjI3Yi1mZmI2NmE0ZDhmM2IuanBlZw==",
+    "title": "Bonita Burrito",
+    "description": "Served with your choice of meat, rice, beans, pico de gallo, cheese, sour cream and guacamole."
+  },
+  {
+    "image": "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kMXJhbHNvZ25qbmczNy5jbG91ZGZyb250Lm5ldC8yNjA5MDVlOC0zMjk1LTRlMmEtOGQzYy00YmY3MGQzZTVhZjcuanBlZw==",
+    "title": "Tea Leaf Salad",
+    "description": "Our Tea Leaf Salad was voted by Sunset Magazine as the Best of the West–Salad” and winner of the “Good Food Award” in 2017."
+  },
+  {
+    "image": "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kMXJhbHNvZ25qbmczNy5jbG91ZGZyb250Lm5ldC8yMzc1OGQxOS04OGFlLTQzOTMtYjQzOS04NTZmYThmODljZTc=",
+    "title": "Pad Thai",
+    "description": "Stir fried small rice noodles, shrimp, dried shrimp, egg, ground peanuts, tofu, and bean sprouts."
+  },
+  {
+    "image": "https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kMXJhbHNvZ25qbmczNy5jbG91ZGZyb250Lm5ldC83ZGJlZjgwMy04NDVhLTQ1MTMtYmI2MS0wNzQxNWM0ODcwYjY=",
+    "title": "Kao Gra Prow",
+    "description": "Sauteed your choice of meat with bell pepper, Thai chili, and basil. Served over steamed rice."
+  }
+]
