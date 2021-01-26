@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #00031a;
+  color: #fff;
+  margin: 40px;
+}
+
+.app {
+  background-color: #212a3f;
+  padding: 30px;
+  border-radius: 20px;
+
+  input {
+    background-color: #2d364b;
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    color: #fff;
+  }
+}
+
+.users {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 15px;
+  margin-bottom: 20px;
+
+  &__item {
+    margin: 10px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &-email {
+      font-size: 12px;
+      opacity: 0.4;
+    }
+  }
+}
+
+button {
+  padding: 10px;
+  outline: none;
+  border: 0;
+  width: 100%;
+  color: #fff;
+  background-color: #fe8468;
+  border-radius: 10px;
+  cursor: pointer;
+
+  opacity: 0.4;
+}
+
+button:not(:last-child) {
+  margin-right: 20px;
+}
+.buttons {
+  display: flex;
+
+  .active {
+    opacity: 1;
+    color: green;
+    color: #fff;
+  }
+}
