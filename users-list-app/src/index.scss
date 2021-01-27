@@ -62,9 +62,17 @@ button:not(:last-child) {
 .buttons {
   display: flex;
 
+  button:hover {
+    cursor: default;
+  }
+
   .active {
     opacity: 1;
     color: green;
     color: #fff;
+  }
+
+  .active:hover {
+    cursor: pointer;
   }
 }
