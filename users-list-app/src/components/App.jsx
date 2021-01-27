@@ -3,21 +3,67 @@ import React from 'react';
 import '../index.scss';
 
 const App = () => {
+  console.log('<App /> was rendered');
+
   const [pageNumber, setPageNumber] = React.useState(1);
+
   const [prevPageUsers, setPrevtPageUsers] = React.useState([]);
-  const [prevPrevPageUsers, setPrevPrevPageUsers] = React.useState([]);
+  const [isPrevButtonActive, togglePrevButtonActive] = React.useState(false);
+
+  const [currentPageUsers, setCurrentPageUsers] = React.useState([]);
+
   const [nextPageUsers, setNextPageUsers] = React.useState([]);
-  const [nextNextPageUsers, setNextNextPageUsers] = React.useState([]);
+  const [isNextButtonActive, toggleNextButtonActive] = React.useState(true);
 
-  const getPrevPageUsersHandler = (event) => {};
-
-  const getNextPageUsersHandler = (event) => {
-    setPageNumber(pageNumber + 1);
+  const getPrevUsersHandler = (event) => {
+    setPageNumber(pageNumber - 1);
+    toggleNextButtonActive(true);
 
     fetch(`https://5c3755177820ff0014d92711.mockapi.io/users?page=${pageNumber}&limit=10`).then(
       (res) => {
         res.json().then((jsonArray) => {
+          setCurrentPageUsers(jsonArray);
+          console.log('fetch current', jsonArray);
+          return jsonArray;
+        });
+      },
+    );
+
+    fetch(`https://5c3755177820ff0014d92711.mockapi.io/users?page=${pageNumber - 1}&limit=10`).then(
+      (res) => {
+        res.json().then((jsonArray) => {
           setNextPageUsers(jsonArray);
+          console.log('fetch prev', jsonArray);
+
+          console.log(event);
+          console.log(event.target);
+
+          if (jsonArray.length === 0) {
+            togglePrevButtonActive(false);
+          }
+
+          return jsonArray;
+        });
+      },
+    );
+  };
+
+  const getNextUsersHandler = (event) => {
+    setPageNumber(pageNumber + 1);
+    togglePrevButtonActive(true);
+
+    //  disableButton();
+    if (nextPageUsers.length === 0) {
+      event.target.classList.toggle('active');
+      event.target.disabled = true;
+      return;
+    }
+
+    fetch(`https://5c3755177820ff0014d92711.mockapi.io/users?page=${pageNumber}&limit=10`).then(
+      (res) => {
+        res.json().then((jsonArray) => {
+          setCurrentPageUsers(jsonArray);
+          console.log('fetch current', jsonArray);
           return jsonArray;
         });
       },
@@ -26,15 +72,20 @@ const App = () => {
     fetch(`https://5c3755177820ff0014d92711.mockapi.io/users?page=${pageNumber + 1}&limit=10`).then(
       (res) => {
         res.json().then((jsonArray) => {
-          setNextNextPageUsers(jsonArray);
+          setNextPageUsers(jsonArray);
+          console.log('fetch next', jsonArray);
+
+          console.log(event);
+          console.log(event.target);
+
+          if (jsonArray.length === 0) {
+            toggleNextButtonActive(false);
+          }
+
           return jsonArray;
         });
       },
     );
-
-    if (nextNextPageUsers.length === 0) {
-      event.currentTarget.classList.toggle('active');
-    }
   };
 
   /* не до конца понимаю, как правильнее сделать пагинацию, через кеширование "page + 2" и проверки его пустоту тем времинем из кеша рендерить, или же делать два фетч запроса на "page + 1" && "page + 2" и проверки "page + 2" на пустоту */
@@ -44,12 +95,11 @@ const App = () => {
     fetch(`https://5c3755177820ff0014d92711.mockapi.io/users?page=${pageNumber}&limit=10`).then(
       (res) => {
         res.json().then((jsonArray) => {
-          //  console.log(jsonArray);
+          console.log('fetch current ', jsonArray);
 
-          setNextPageUsers(jsonArray);
+          setCurrentPageUsers(jsonArray);
 
-          //  console.log(new Date().getSeconds());
-          return jsonArray;
+          // нужен ли ретёрн в таких запросах или чисто хуки?
         });
       },
     );
@@ -57,35 +107,38 @@ const App = () => {
     fetch(`https://5c3755177820ff0014d92711.mockapi.io/users?page=${pageNumber + 1}&limit=10`).then(
       (res) => {
         res.json().then((jsonArray) => {
-          //  console.log(jsonArray);
+          console.log('fetch next', jsonArray);
 
-          setNextNextPageUsers(jsonArray);
-
-          //  console.log(new Date().getSeconds());
-          return jsonArray;
+          setNextPageUsers(jsonArray);
         });
       },
     );
-  }, [pageNumber]);
+  }, []);
 
+  // канон ли класснейм тернарником монитрить изменение стейта?
   return (
     <div className="app">
       <ul className="users">
-        <li className="users__item">
-          <div className="users__item-name">Leanne Graham</div>
-          <div className="users__item-email">Sincere@april.biz</div>
-        </li>
+        {currentPageUsers.map((item) => {
+          return (
+            <li className="users__item">
+              <div className="users__item-name">{item.name}</div>
+              <div className="users__item-email">{item.email}</div>
+            </li>
+          );
+        })}
       </ul>
       <div className="buttons">
         <button
-          onClick={(event) => {
-            if (event.currentTarget.classList.contains('active')) {
-              setPageNumber(pageNumber - 1);
-            }
-          }}>
+          onClick={getPrevUsersHandler}
+          className={isPrevButtonActive ? 'active' : ''}
+          disabled={isPrevButtonActive ? false : true}>
           {'<-'}
         </button>
-        <button onClick={getNextPageUsersHandler} className="active">
+        <button
+          onClick={getNextUsersHandler}
+          className={isNextButtonActive ? 'active' : ''}
+          disabled={isNextButtonActive ? false : true}>
           {'->'}
         </button>
       </div>
